@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-export const Layout = ({ children }: React.PropsWithChildren<{}>) => {
+const Layout = ({ children }: React.PropsWithChildren<{}>) => {
   return (
     <>
       <Head>
