@@ -1,21 +1,24 @@
 import { useState} from 'react';
 import { requestCreateTodo } from '../lib/todos-lib';
+import { useTodos } from "@/hooks/useTodos";
 
 type handleChange  = (e: React.ChangeEvent<HTMLInputElement>) => void;
 type handleSumbit = (toDoInput: string) => void;
 
 const NewTodoForm = () => {
   const [toDoInput, updateToDoInput] = useState<string>('');
+  const { todos } = useTodos();
+  console.log('MYTODOS:', todos);
 
   const handleChange: handleChange = e => {
     updateToDoInput(e.target.value);
   };
-
   console.log('INPUT:', toDoInput);
+  
 
   const emptyInput: boolean = toDoInput === '' ? true : false;
 
- // const handleSubmit = 
+  const handleSubmit = (newTitle: string) => requestCreateTodo({title: newTitle});
 
 
   return (
@@ -31,6 +34,7 @@ const NewTodoForm = () => {
       </div>
       <button
         type="submit"
+        onClick={ ()=> handleSubmit(toDoInput) }
         disabled={ emptyInput }
         className="min-w-[128px] rounded border border-red-600 bg-red-500 px-2 text-base font-medium leading-10 text-white hover:bg-red-600 focus-visible:outline-2  focus-visible:outline-offset-4 focus-visible:outline-blue-300 disabled:border-transparent disabled:bg-gray-200"
       >

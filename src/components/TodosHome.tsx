@@ -1,5 +1,6 @@
 import { HiOutlineClipboardDocumentCheck as Icon } from "react-icons/hi2";
 import NewTodoForm from "./NewTodoForm";
+import TodoList from "./TodosList";
 import { useTodos } from "@/hooks/useTodos";
 
 const Header = () => (
@@ -16,6 +17,7 @@ const TodosHome = () => {
     <div className="space-y-6">
       <Header />
       <NewTodoForm />
+      <TodoList />
     </div>
   );
 };

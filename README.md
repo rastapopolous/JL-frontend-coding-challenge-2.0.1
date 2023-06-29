@@ -113,26 +113,38 @@ To return your code challenge:
 # Stories
 
 ### 1. As a developer, I want to use `git`
-
 - Initialize a git repository and commit your changes incrementally.
-#### YES
+  #### YES
+
+
 
 ### 2. As a user, I can create a new Todo.
-
 > NOTE: The example mocks show a clear button inside the input. **THIS IS OPTIONAL**
 
+
 - The new todo should require a title
+  #### YES
+
 - When the form it submitted, the new todo should appear in the Incomplete list
+
+
 - The new todo item should be persisted (i.e., it is present after page reload)
+
+
 - The add button should be disabled for empty input ![Todos Form Active Empty](./examples/todos-2.png)
-####YES
+  #### YES
 
 - The add button should be enabled when text is present ![Todos Form Active Present](./examples/todos-3.png)
+  #### YES
+
 - **OPTIONAL** There should be a way to easily clear the input.
 
-### 3. As a user, I can view a list of Todos.
 
+
+### 3. As a user, I can view a list of Todos.
 - There should be a list of Incomplete todo items including a counter
+
+
 - There should be a list of Complete todo items including a counter
 - Incomplete todo items have an empty checkmark
 - Complete todo items have a checkmark
