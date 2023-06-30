@@ -146,19 +146,28 @@ To return your code challenge:
 
 
 - There should be a list of Complete todo items including a counter
-- Incomplete todo items have an empty checkmark
-- Complete todo items have a checkmark
 
+
+- Incomplete todo items have an empty checkmark
+  #### YES
+
+- Complete todo items have a checkmark
 ![Todos list](./examples/todos-5.png)
+  #### YES
+
 
 ### 4. As a user, I can mark a Todo as complete or incomplete.
 
 - I want to click either the circle or the todo text to toggle the status (incomplete/complete).
+   #### YES
+
+
 - The todo item should move to the appropriate incomplete/complete list when its status changes.
+
+
 - There should be visual feedback that the todo is clickable (desktop users).
-
 **See example video in `examples/todos-example.mp4`**
-
+    
 ### 5. As a user, I can delete a Todo
 
 - When I mouse over a todo item, I want a delete icon to appear.

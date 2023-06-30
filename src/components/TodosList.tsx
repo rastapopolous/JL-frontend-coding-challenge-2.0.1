@@ -17,7 +17,6 @@ const TodoList  = () => {
               oneTodo={oneTodo}
               index={index}
             />
-            <div className="border border-stone-100"/>
           </>
         )
       })}

@@ -1,5 +1,5 @@
 import  { Todo } from "../lib/todos-lib";
-import { HiCheck } from "react-icons/hi2";
+import { HiCheck, HiOutlineTrash } from "react-icons/hi2";
 import { useTodos } from "@/hooks/useTodos";
 import { useState } from 'react';
 import { requestUpdateTodo} from '../lib/todos-lib';
@@ -33,31 +33,45 @@ const TodoEl = (props: toDoElProps) => {
     const updatedTodo: Todo = {...todos[index], completed: toggleCompleted}
     await requestUpdateTodo(updatedTodo);
     mutate();
-    // mutate({ ...todos, todos[index]: updatedTodo });
   }
-  // const styles = {
-  //   {needTo: 'w-7 h-7  mr-2 rounded-full border-2 border-stone-300',
-  //   didit: `w-8 h-8 flex justify-center items-center mr-2 rounded-full  bg-green-600`
-  // }
+ 
  
   return (
-    <div className= "flex flex-row justify-start items-center h-20 font-medium">
-      {  completed === false ?
-        <div 
-          className="w-7 h-7  mr-2 rounded-full border-2 border-stone-300"
-          onClick={()=>toggleDoDone(completed)}
-        />
-        :
-        <div className="w-8 h-8 flex justify-center items-center mr-2 rounded-full  bg-green-600"
-          onClick={()=>toggleDoDone(completed)}
-        >
-          {/* <HiCheck color ="white" size="1.25rem" /> */}
-          {completed === true && <HiCheck color="white" size="1.25rem"/>}
+   
+    <>
+        {/* This is the original outer white dove h-20 */}
+      <div className="h-20 flex justify-center items-center" >
+        
+        {/* this is the inner div gray on hover  it needes to somehow be wider*/}
+        {/* it needs to flex justify children at both ends and matching border radius w outer input div */}
+        {/* hover is slightly lighter gray than the input one */}
+        <div className= "h-[85%] w-[100%] flex flex-row justify-between items-center rounded-xl text-white hover:bg-stone-50 hover:border-stone-800 hover:text-stone-400 hover:cursor-pointer">
+          
+          {/* this is the div countainer that holds checkbox name they need to flyex justify betwern */}
+          <div className=" flex flex-row justify-between items-center pl-[1.5%] font-medium" onClick={()=>toggleDoDone(completed)}>
+            {  completed === false ?
+              <div 
+                className="w-7 h-7  mr-2 rounded-full border-2 border-stone-300"
+              />
+              :
+              <div className="w-7 h-7 flex justify-center items-center mr-2 rounded-full  bg-green-600"
+              >
+                {completed === true && <HiCheck color="white" size="1.25rem"/>}
+              </div>
+            }
+            <div className="text-stone-800">
+              {title}
+            </div>  
+          </div>
+          <div className="w-[5%] hover:text-red-600 ">
+            <HiOutlineTrash size="1.75rem" />
+          </div> 
         </div>
-      }
-      {title}
 
-    </div>
+        
+      </div> 
+      <div className="w-[96%] ml-[2%] border border-stone-100"/>
+    </>
   );
 };
 
