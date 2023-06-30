@@ -1,8 +1,11 @@
 import { HiOutlineClipboardDocumentCheck as Icon } from "react-icons/hi2";
 import NewTodoForm from "./NewTodoForm";
-import TodoList from "./TodosList";
+import TodosList from "./TodosList";
+import ErrorAlert from "./ErrorAlert"
 import { useTodos } from "@/hooks/useTodos";
 import { Todo } from "@/lib/todos-lib";
+import ErrorContext from "./errorContext";
+import { useState } from 'react';
 
 
 const Header = () => (
@@ -12,25 +15,39 @@ const Header = () => (
   </header>
 );
 
-const TodosHome = () => {
+const TodosHome = ()=> {
+  
   const { todos } = useTodos();
+  
   const undoneTodos: Todo[] = todos.filter(todo => todo.completed === false);
   const doneTodos: Todo[] = todos.filter(todo => todo.completed === true);
   
-  return (
-    <div className="space-y-6">
-      <Header />
-      <NewTodoForm />
-      <TodoList 
-        listTitle={'Incomplete'}
-        todoArray={undoneTodos}
-      />
-      <TodoList
-         listTitle={'Complete'}
-         todoArray={doneTodos}
-      />
-    </div>
-  );
+  const [contextDisplayErrorMsg, contextToggleDisplayError ] =  useState<boolean>(false);
+    
+    return (
+     //ErrorContext maintains state for error message between page reloads
+      <ErrorContext.Provider
+      value={{
+        contextDisplayErrorMsg, 
+        contextToggleDisplayError
+      }}>
+
+        <div className="space-y-6">
+          <ErrorAlert />
+          <Header />
+          <NewTodoForm />
+          <TodosList 
+            listTitle={'Incomplete'}
+            todoArray={undoneTodos}
+          />
+          <TodosList
+            listTitle={'Complete'}
+            todoArray={doneTodos}
+          />
+        </div>
+
+      </ErrorContext.Provider>
+    );
 };
 
 export default TodosHome;

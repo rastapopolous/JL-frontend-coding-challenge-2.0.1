@@ -1,9 +1,7 @@
 import  { Todo } from "../lib/todos-lib";
 import { HiCheck, HiOutlineTrash } from "react-icons/hi2";
 import { useTodos } from "@/hooks/useTodos";
-import { useState } from 'react';
 import { requestUpdateTodo, requestDeleteTodo} from '../lib/todos-lib';
-import { deleteTodo } from "@/mocks/db/todos";
 
 
 type todoElProps = {
@@ -13,7 +11,6 @@ type todoElProps = {
 type toggleDoDone = (completed: boolean) => void;
 type deleteTodo = (id: string) => void;
 
-console.log('Rerendering me!')
 const TodoEl = (props: todoElProps) => {
   const {
     index, 

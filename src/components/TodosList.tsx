@@ -1,6 +1,6 @@
 
 import { useTodos } from "@/hooks/useTodos";
-import  { Todo } from "../lib/todos-lib";
+import  { Todo} from "../lib/todos-lib";
 import TodoEl from "./TodoEl";
 
 type todoListProps = {
@@ -8,7 +8,7 @@ type todoListProps = {
   todoArray: Todo[],
 }
 
-const TodoList  = (props: todoListProps) => {
+const TodosList  = (props: todoListProps) => {
   const {
     listTitle, 
     todoArray
@@ -39,4 +39,4 @@ const TodoList  = (props: todoListProps) => {
   );
 };
 
-export default TodoList;
+export default TodosList;

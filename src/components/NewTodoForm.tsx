@@ -1,22 +1,31 @@
 import { useState} from 'react';
 import { requestCreateTodo } from '../lib/todos-lib';
-import { useTodos } from "@/hooks/useTodos";
+import { useContext } from 'react';
+import ErrorContext from './errorContext';
 
 type handleChange  = (e: React.ChangeEvent<HTMLInputElement>) => void;
 type handleSubmit = (toDoInput: string) => void;
 
 const NewTodoForm = () => {
+
+  const { contextDisplayErrorMsg, contextToggleDisplayError } = useContext(ErrorContext);
   const [toDoInput, updateToDoInput] = useState<string>('');
-  const { todos } = useTodos();
 
   const handleChange: handleChange = e => {
     updateToDoInput(e.target.value);
   };
 
+  const handleSubmit = (newTitle: string) => {
+    if (newTitle.includes('mock-error')) {
+      contextToggleDisplayError(true);
+    } 
+      else {
+        requestCreateTodo({title: newTitle});
+        contextToggleDisplayError(false);
+      };
+  };
+  
   const emptyInput: boolean = toDoInput === '' ? true : false;
-
-  const handleSubmit = (newTitle: string) => requestCreateTodo({title: newTitle});
-
 
   return (
     <form className="flex flex-col space-y-2 rounded-xl border border-stone-200 bg-stone-50 p-4 sm:flex-row sm:space-x-2 sm:space-y-0">
@@ -31,7 +40,7 @@ const NewTodoForm = () => {
       </div>
       <button
         type="submit"
-        onClick={ ()=>handleSubmit(toDoInput) }
+        onClick={()=>handleSubmit(toDoInput) }
         disabled={ emptyInput }
         className="min-w-[128px] rounded border border-red-600 bg-red-500 px-2 text-base font-medium leading-10 text-white hover:bg-red-600 focus-visible:outline-2  focus-visible:outline-offset-4 focus-visible:outline-blue-300 disabled:border-transparent disabled:bg-gray-200"
       >

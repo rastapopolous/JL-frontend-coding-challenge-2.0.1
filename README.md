@@ -1,3 +1,27 @@
+
+# JL- A few notes on the challenge
+This in fairly good shape.  All of the UI implented, working according to specs with three exceptions, two moderate, one very small:
+Ive been working to try and resolve two of these since last night.  On balance, its already behind stated schedule and thought it best to get it to you
+
+Three outstanding issues:
+State Updates for checked/unchecked todos:
+  These worked perfectly when all were in one list, without completed/incompleted categories
+  Fetch/Get/Put are working without error
+  The problem presents with the filter method I used in to sort completed and not completed todos, received as an array from the useSWR hook in the TodosHome componnent
+  Passing those into two child list display compnents triggers errors in updates, similar to a race condition with useState.   
+  I believe these errors could originate in my mutate configuration, its my first time using SWR so its hard to know, my understanding is that mutate after fetch should update that data, regardless of which component I call it in.  
+
+Persistence for Mock-error message
+  UI is completed, this was more complex than I had anticipated, and had less time than I needed for it.  Logic and UI are implemented to toggle display of error message per the specs in the story, under one condition (x button) in the message itself, and two in the form component. but state was an issue here too.  I expected this to be straightforward to implement, but persistence was strangely complicated.  I started with prop drilling betweent the relevant components, but persistence/toggling  was buggy between component updates
+
+  I move the state for just the error message to context, wrapping the tne TodosHome component and children, figuring that should persist the state for it correctly, and still had the same issues.
+
+Overall, UI was implemented per specs, SWRfetch/typescript/tailwind were all fine.  Some challenges with state that I would chalk up to unfamiliarity and time constraints.  
+
+Apologies for the slight delay getting this back to you.
+
+
+
 # Overview
 
 A "To Do App" coding challenge for frontend developers at Sincere.
@@ -126,10 +150,10 @@ To return your code challenge:
   #### YES
 
 - When the form it submitted, the new todo should appear in the Incomplete list
-
+  #### YES
 
 - The new todo item should be persisted (i.e., it is present after page reload)
-
+  #### YES
 
 - The add button should be disabled for empty input ![Todos Form Active Empty](./examples/todos-2.png)
   #### YES
@@ -138,15 +162,15 @@ To return your code challenge:
   #### YES
 
 - **OPTIONAL** There should be a way to easily clear the input.
-
+  #### YES
 
 
 ### 3. As a user, I can view a list of Todos.
 - There should be a list of Incomplete todo items including a counter
-
+  #### YES
 
 - There should be a list of Complete todo items including a counter
-
+  #### YES
 
 - Incomplete todo items have an empty checkmark
   #### YES
@@ -163,25 +187,32 @@ To return your code challenge:
 
 
 - The todo item should move to the appropriate incomplete/complete list when its status changes.
-
+  #### YES (but problematic)
 
 - There should be visual feedback that the todo is clickable (desktop users).
 **See example video in `examples/todos-example.mp4`**
-    
-### 5. As a user, I can delete a Todo
+#### YES
 
+### 5. As a user, I can delete a Todo
+   #### YES
 - When I mouse over a todo item, I want a delete icon to appear.
+   #### YES
 - Clicking the delete icon should remove the todo item from the list and persist the change.
+   #### YES
 - Confirmation is not required.
 
 ![Todo delete button](./examples/todos-6.png)
 
 ### 6. As a user, I see an error message when something fails
-
 > **IMPORTANT!** The mock API is configured to throw an error if the title contains `mock-error`
+### YES (but problematic)
 
 - I want to see an error message when there is a problem.
-- I want to be able to dismiss the error message.
-- I want the error message to dismiss automatically after successfully creating a new todo item.
+### YES (but problematic)
 
+- I want to be able to dismiss the error message.
+### YES (but problematic)
+
+- I want the error message to dismiss automatically after successfully creating a new todo item.
 ![Todos error](./examples/todos-7.png)
+### YES (but problematic)
