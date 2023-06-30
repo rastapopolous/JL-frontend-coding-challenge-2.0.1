@@ -6,14 +6,15 @@ import { requestUpdateTodo, requestDeleteTodo} from '../lib/todos-lib';
 import { deleteTodo } from "@/mocks/db/todos";
 
 
-type toDoElProps = {
+type todoElProps = {
   index: number, 
   oneTodo: Todo
-}
+};
 type toggleDoDone = (completed: boolean) => void;
 type deleteTodo = (id: string) => void;
 
-const TodoEl = (props: toDoElProps) => {
+console.log('Rerendering me!')
+const TodoEl = (props: todoElProps) => {
   const {
     index, 
     oneTodo: {
@@ -23,7 +24,8 @@ const TodoEl = (props: toDoElProps) => {
       priority
     }
   } = props;
- 
+
+
   const { todos, mutate } = useTodos();
  
   const toggleDoDone = async(doDone: boolean) => {
@@ -31,28 +33,28 @@ const TodoEl = (props: toDoElProps) => {
     const updatedTodo: Todo = {...todos[index], completed: toggleCompleted}
     await requestUpdateTodo(updatedTodo);
     mutate();
-  }
+  };
  
   const deleteTodo = async(id: string) => {
     await requestDeleteTodo(id);
     mutate();
-  }
+  };
 
   return (
-    <>
-        {/* This is the original outer white dove h-20 */}
+    <div>
+        {/* This is the original outer white div h-20 */}
       <div className="h-20 flex justify-center items-center" >
         
-        {/* this is the inner div gray on hover  it needes to somehow be wider*/}
+        {/* this is the inner div gray on hover*/}
         {/* it needs to flex justify children at both ends and matching border radius w outer input div */}
         {/* hover is slightly lighter gray than the input one */}
         <div className= "h-[85%] w-[100%] flex flex-row justify-between items-center rounded-xl text-white hover:bg-stone-50 hover:text-stone-300 hover:cursor-pointer">
           
-          {/* this is the div countainer that holds checkbox name they need to flyex justify betwern */}
+          {/* this is the div countainer that holds checkbox & name  */}
           <div className=" flex flex-row justify-between items-center pl-[1.5%] font-medium" 
                onClick={()=>toggleDoDone(completed)}
           >
-            {  completed === false ?
+            { completed === false ?
               <div 
                 className="w-7 h-7  mr-2 rounded-full border-2 border-stone-300"
               />
@@ -76,7 +78,7 @@ const TodoEl = (props: toDoElProps) => {
         
       </div> 
       <div className="w-[96%] ml-[2%] border border-stone-100"/>
-    </>
+    </div>
   );
 };
 

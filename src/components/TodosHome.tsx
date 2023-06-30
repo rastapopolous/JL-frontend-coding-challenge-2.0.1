@@ -2,6 +2,8 @@ import { HiOutlineClipboardDocumentCheck as Icon } from "react-icons/hi2";
 import NewTodoForm from "./NewTodoForm";
 import TodoList from "./TodosList";
 import { useTodos } from "@/hooks/useTodos";
+import { Todo } from "@/lib/todos-lib";
+
 
 const Header = () => (
   <header className="flex flex-row items-center space-x-2">
@@ -12,14 +14,24 @@ const Header = () => (
 
 const TodosHome = () => {
   const { todos } = useTodos();
-  console.log('MYTODOS:', todos);
+  const undoneTodos: Todo[] = todos.filter(todo => todo.completed === false);
+  const doneTodos: Todo[] = todos.filter(todo => todo.completed === true);
+  
   return (
     <div className="space-y-6">
       <Header />
       <NewTodoForm />
-      <TodoList />
+      <TodoList 
+        listTitle={'Incomplete'}
+        todoArray={undoneTodos}
+      />
+      <TodoList
+         listTitle={'Complete'}
+         todoArray={doneTodos}
+      />
     </div>
   );
 };
 
 export default TodosHome;
+ 

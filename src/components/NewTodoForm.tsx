@@ -12,7 +12,6 @@ const NewTodoForm = () => {
   const handleChange: handleChange = e => {
     updateToDoInput(e.target.value);
   };
-  console.log('INPUT:', toDoInput);
 
   const emptyInput: boolean = toDoInput === '' ? true : false;
 
